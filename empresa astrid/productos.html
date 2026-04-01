@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | Divina Astrid</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para la rejilla de categorías */
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+
+        .category-item {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #d4af37;
+            margin-bottom: 15px;
+            background-color: #eee;
+        }
+
+        .category-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-item h3 {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+        }
+
+        /* Sección de productos ocultos inicialmente */
+        .product-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .back-btn {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #1a1a1a;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="About.html">Sobre Nosotros</a>
+        <a href="productos.html">Productos</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contactos.html">Contactos</a>
+    </nav>
+
+    <main class="container">
+        <h2 style="text-align: center;">Nuestras Colecciones</h2>
+        
+        <div id="categories-menu" class="categories-container">
+            <div class="category-item" onclick="showCategory('anillos')">
+                <div class="category-circle"><img src="anillo.inicio.png" alt="Anillos"></div>
+                <h3>Anillos</h3>
+            </div>
+            <div class="category-item" onclick="showCategory('collares')">
+                <div class="category-circle"><img src="collar.inicio.jpg" alt="Collares"></div>
+                <h3>Collares</h3>
+            </div>
+            <div class="category-item" onclick="showCategory('relojes')">
+                <div class="category-circle"><img src="reloj.inicio.jpg" alt="Relojes"></div>
+                <h3>Relojes</h3>
+            </div>
+            <div class="category-item" onclick="showCategory('pulseras')">
+                <div class="category-circle"><img src="pulsera.inicio.jpg" alt="Pulseras"></div>
+                <h3>Pulseras</h3>
+            </div>
+        </div>
+
+        <button id="back-button" class="back-btn" onclick="showMenu()">← Volver a categorías</button>
+
+        <div id="anillos" class="product-grid">
+            <div class="product-card">
+                <img src="anillo.stardust.png" alt="Stardust">
+                <p>Anillo de compromiso "Stardust", de plata</p>
+            </div>
+            <div class="product-card">
+                <img src="anillo.cometa.png" alt="Cometa">
+                <p>Anillo "Cometa", de oro rosado</p>
+            </div>
+            <div class="product-card">
+                <img src="anillo.astridè.png" alt="Astridè">
+                <p>Anillo "Astridè", de oro blanco</p>
+            </div>
+        </div>
+
+        <div id="collares" class="product-grid">
+            <div class="product-card">
+                <img src="collar.luna.png" alt="Luna">
+                <p>Collar "Luna", de plata</p>
+            </div>
+            <div class="product-card">
+                <img src="collar.estrella.png" alt="Estrella">
+                <p>Collar "Estrella", de oro</p>
+            </div>
+            <div class="product-card">
+                <img src="collar.astride.png" alt="Astridè">
+                <p>Collar "Astridè", de oro</p>
+            </div>
+        </div>
+
+        <div id="relojes" class="product-grid">
+            <div class="product-card">
+                <img src="reloj.mother.png" alt="Mother-of-Pearl">
+                <p>Reloj "Mother-of-Pearl", de plata</p>
+            </div>
+            <div class="product-card">
+                <img src="reloj.constellation.png" alt="Constellation">
+                <p>Reloj "Constellation Dial", de oro</p>
+            </div>
+            <div class="product-card">
+                <img src="reloj.sunburst.png" alt="Sunburst">
+                <p>Reloj "Sunburst Dial", de oro rosado y plata</p>
+            </div>
+        </div>
+
+        <div id="pulseras" class="product-grid">
+            <div class="product-card">
+                <img src="pulsera.astride.png" alt="Astridè">
+                <p>Pulsera "Astridè" de oro</p>
+            </div>
+            <div class="product-card">
+                <img src="pulsera.moonstone.png" alt="Moonstone">
+                <p>Pulsera "Moonstone" de plata</p>
+            </div>
+            <div class="product-card">
+                <img src="pulsera.star.png" alt="Star">
+                <p>Pulsera "Star" de oro rosado</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showCategory(id) {
+            // Ocultar menú de categorías
+            document.getElementById('categories-menu').style.display = 'none';
+            // Ocultar todas las rejillas de productos
+            let grids = document.getElementsByClassName('product-grid');
+            for (let i = 0; i < grids.length; i++) {
+                grids[i].style.display = 'none';
+            }
+            // Mostrar la seleccionada y el botón volver
+            document.getElementById(id).style.display = 'grid';
+            document.getElementById('back-button').style.display = 'block';
+        }
+
+        function showMenu() {
+            // Mostrar menú y ocultar productos
+            document.getElementById('categories-menu').style.display = 'flex';
+            document.getElementById('back-button').style.display = 'none';
+            let grids = document.getElementsByClassName('product-grid');
+            for (let i = 0; i < grids.length; i++) {
+                grids[i].style.display = 'none';
+            }
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Divina Astrid - Joyería Exclusiva. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

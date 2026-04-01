@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Divina Astrid</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-top: 5px solid #d4af37;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Asegura que el padding no desborde */
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-submit {
+            background-color: #1a1a1a;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 15px 30px;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #d4af37;
+            color: #1a1a1a;
+        }
+
+        .error-msg {
+            color: #cc0000;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="About.html">Sobre Nosotros</a>
+        <a href="productos.html">Productos</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contactos.html">Contactos</a>
+    </nav>
+
+    <main class="container">
+        <div class="contact-container">
+            <h2 style="text-align: center; margin-bottom: 30px;">Contáctanos</h2>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej. Astrid Divina" required>
+                    <span id="error-nombre" class="error-msg">El nombre solo debe contener letras.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" placeholder="Ej. 04121234567" required>
+                    <span id="error-telefono" class="error-msg">El teléfono solo debe contener números.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" placeholder="correo@ejemplo.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentario">Comentario</label>
+                    <textarea id="comentario" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que se recargue la página
+
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            
+            // Expresiones regulares para validar
+            const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+            const soloNumeros = /^[0-9]+$/;
+
+            let error = false;
+
+            // Validar Nombre
+            if (!soloLetras.test(nombre)) {
+                document.getElementById('error-nombre').style.display = 'block';
+                error = true;
+            } else {
+                document.getElementById('error-nombre').style.display = 'none';
+            }
+
+            // Validar Teléfono
+            if (!soloNumeros.test(telefono)) {
+                document.getElementById('error-telefono').style.display = 'block';
+                error = true;
+            } else {
+                document.getElementById('error-telefono').style.display = 'none';
+            }
+
+            // Alerta final
+            if (error) {
+                alert("Por favor, corrige los campos marcados en rojo antes de enviar.");
+            } else {
+                alert("¡Gracias por contactar a Divina Astrid! Tu mensaje ha sido enviado con éxito.");
+                form.reset(); // Limpia el formulario
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Divina Astrid - Joyería Exclusiva. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

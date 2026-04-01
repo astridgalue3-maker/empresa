@@ -1,0 +1,100 @@
+/* Estilos generales */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fdfdfd;
+    line-height: 1.8;
+}
+
+/* Navegación */
+nav {
+    background-color: #1a1a1a;
+    padding: 1.2rem 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid #d4af37;
+}
+
+nav a {
+    color: #d4af37; /* Dorado clásico */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* Sección Hero (Imagen de fondo) */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1500') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    letter-spacing: 6px;
+    font-weight: 300;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #d4af37;
+}
+
+/* Contenido Principal */
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.intro h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+}
+
+.intro-text {
+    font-size: 1.15rem;
+    color: #444;
+    border-left: 3px solid #d4af37;
+    padding-left: 30px;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.highlight {
+    color: #b8860b;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background-color: #1a1a1a;
+    color: #777;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.85rem;
+    margin-top: 60px;
+}
