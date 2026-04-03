@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <h1>A.V.E GAMING SHOP</h1>
+            <p>La mejor tienda de videojuegos</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="About.html">Sobre Nosotros</a></li>
+                <li><a href="Product.html">Productos</a></li>
+                <li><a href="service.html">Servicios</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Contacto</h1>
+        <p class="form-instruction">Llenar el formulario</p>
+
+        <form id="contactForm" onsubmit="return validarFormulario();">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="...">
+
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono" required placeholder="...">
+
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" required placeholder="...">
+
+            <label for="comentario">Comentario</label>
+            <textarea id="comentario" name="comentario" required placeholder="..."></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>© 2026 A.V.E GAMING SHOP.</p>
+        <p><a href="index.html">Ir al inicio</a></p>
+    </footer>
+
+    <script src="contact.js"></script>
+</body>
+</html>
