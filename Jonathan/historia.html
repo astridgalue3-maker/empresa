@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia | Línea de Tiempo</title>
+    <style>
+        :root {
+            --verde-claro: #b2fab4;
+            --verde-fuerte: #2e7d32;
+            --blanco: #ffffff;
+            --fondo: #f0fff0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--fondo);
+            color: #333;
+        }
+
+        /* Navegación */
+        nav {
+            width: 100%;
+            background-color: var(--blanco);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--verde-fuerte); }
+
+        /* Encabezado */
+        .header-historia {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, var(--blanco), var(--fondo));
+        }
+
+        h1 { color: var(--verde-fuerte); font-size: 2.5rem; }
+
+        /* Contenedor de la Línea de Tiempo */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* La línea central */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--verde-claro);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        /* Contenedores de eventos */
+        .event {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        /* Círculos decorativos en la línea */
+        .event::after {
+            content: '❤';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--blanco);
+            border: 4px solid var(--verde-claro);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            text-align: center;
+            font-size: 12px;
+            line-height: 25px;
+            color: var(--verde-fuerte);
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+
+        .right::after { left: -17px; }
+
+        /* Contenido de los cuadros */
+        .content {
+            padding: 20px 30px;
+            background-color: var(--blanco);
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--verde-claro);
+        }
+
+        .content h2 { margin-top: 0; color: var(--verde-fuerte); font-size: 1.2rem; }
+        .content p { margin-bottom: 0; line-height: 1.5; font-size: 0.95rem; }
+
+        /* Corazones flotantes de fondo */
+        .bg-heart {
+            position: fixed;
+            font-size: 20px;
+            color: var(--verde-claro);
+            opacity: 0.3;
+            z-index: -1;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsivo para móviles */
+        @media screen and (max-width: 600px) {
+            .timeline::after { left: 31px; }
+            .event { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .event::after { left: 15px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="historia.html" style="color: var(--verde-fuerte);">Nosotros</a>
+        <a href="juegos.html">Diversión</a>
+        <a href="razones.html">Razones</a>
+        <a href="galeria.html">Fotos</a>
+        <a href="carta.html">Buzón</a>
+    </nav>
+
+    <div class="header-historia">
+        <h1>Nuestra Historia 💚</h1>
+        <p>Un viaje por los momentos que cambiaron mi vida.</p>
+    </div>
+
+    <div class="timeline">
+        <div class="event left">
+            <div class="content">
+                <h2>El Comienzo ✨</h2>
+                <p>A veces me detengo a pensar en ese instante exacto, en el primer cruce de palabras o ese mensaje que parecía uno más, pero que terminó siendo el inicio de mi felicidad. Es increíble cómo la vida puede cambiar en un segundo, cómo un 'hola' o una mirada fueron capaces de abrir una puerta que yo ni siquiera sabía que existía. 
+                    Recuerdo el día del cine, fue en ese momento que confirme que de verdad me gustabas, más que nada cuando llegamos a casa de Nei y pudimos hablar más. Y cuando me escribiste por primera vez me parecía surreal que enserio estuvieramos hablando y comenzando un vinculo que se volvió increíblemente importante para mi.
+Ese mismo día fue el encendido de la cascada y me la pase bien fue por ti, me divertí con la tonterías que decías y hacías. Nunca me cansaré de decir que lo mejor de esa noche fue cuando después de despedirnos , apareciste otra vez solo para terminar de acompañarme hasta donde estaba mi familia. En aquel momento no imaginaba que estaba conociendo al refugio de mis días, pero hoy miro hacia atrás y entiendo que el destino estaba trazando el camino más hermoso para traerme hasta ti. Ese día no solo te conocí a ti, sino que también descubrí la mejor versión de mi vida.</p>
+            </div>
+        </div>
+
+        <div class="event right">
+            <div class="content">
+                <h2>Primera vez en mi casa ☕</h2>
+                <p>Recuerdo perfectamente el momento en que cruzaste el umbral de mi puerta. De repente, las paredes de mi casa parecieron cobrar una vida nueva. Ver tus cosas mezclarse con las mías y sentir tu presencia llenando cada rincón fue como ver esa pieza que faltaba encajar en su sitio.
+
+Estaba realmente emocionada al verte allí, compartiendo con mi familia. Fue algo inexplicable. Te integraste con tal naturalidad que, en cuestión de instantes, ya eras uno más de nosotros. Cuando me abrazaste mientras veíamos Coraline, el mundo se detuvo. Supe, ahí entre tus brazos, que no quería que esa calidez me soltara nunca.
+
+Al final del día, cuando el ruido se calmó y nos acostamos a dormir, no pude evitar que las lágrimas salieran solas. No eran de tristeza, sino de una gratitud inmensa que me quemaba el pecho. Lloré y oré en silencio, agradeciendo al cielo por haberme cruzado contigo, alguien tan increíble que me eligió entre tantas personas. En eso momento, mientras que solo nos separaban unos metros de distancia, le pedí a la vida que lo nuestro fuera eterno, especial y duradero, porque entendí que eres el amor que siempre esperé tener. Fue en ese instante cuando comprendí que ya no quería que te fueras nunca.</p>
+            </div>
+        </div>
+
+        <div class="event left">
+            <div class="content">
+                <h2>El "Sí" 💍</h2>
+                <p>Hay días que comienzan como cualquier otro y terminan convirtiéndose en momentos especiales. Aquella tarde, yo pensaba que solo compartiríamos unas horas más juntos, pero el destino —o mejor dicho, tus planes— tenían guardada una sorpresa que no esperaba.
+
+Sin planearlo, terminamos en casa de tu abuela. Entrar en ese espacio fue como descubrir el mapa de tu corazón. Conocí tu núcleo, tu refugio y una familia tan linda que me recibió con mucha calidez y amabilidad. Era un ambiente tan acogedor que, por un momento, me olvidé del mundo exterior.
+
+Pero lo que menos esperaba, era que sacarías un ramo de flores para cambiar mi vida. Me pediste caminar juntos en esta aventura llamada amor con un discurso breve, pero especial, que todavía me pregunto cómo logré contener las lágrimas. Hiciste por mí algo que nadie había hecho antes: me elegiste con valentía y con detalles que se quedaron grabados en mi corazón. Esa noche no solo me alegraste las horas, me hiciste la mujer más feliz del mundo y transformaste un día común en la fecha que lo cambió todo.</p>
+            </div>
+        </div>
+
+        <div class="event right">
+            <div class="content">
+                <h2>Un Recuerdo Especial 📸</h2>
+                <p>A veces me invade una pequeña nostalgia al pensar que muchas de nuestras conversaciones más profundas han tenido que ser a través de una pantalla, pero me consuela saber que esto es solo el comienzo de todas las vivencias que nos esperan. Mientras ese momento llega, guardo con mucho cariño los mejores días que pasé contigo, y sé que el de la cascada ocupa un lugar importante también para ti.
+
+Aquel día, todo se sintió perfecto. Me asombra ver cómo, sin necesidad de grandes planes, el universo —o quizás Diosito mismo— acomoda las piezas para que todo salga bien entre nosotros. Pero más allá de las risas y de esos besos que todavía me encienden, lo que hizo ese día inolvidable fue el consuelo y apoyo que encontré en ti.
+
+Venía de una semana difícil, de esas que te dejan la mente agotada, y tú me diste exactamente lo que me había faltado tanto tiempo. Sentir tu abrazo fue como abrazar a mi niña interior. Fue recibir una ternura y un cuidado que pocas veces conocí antes. Fue inevitable soltar algunas lágrimas, no solo por el cansancio, sino por la alegría de saber que, por fin, tengo a alguien que sabe sostenerme. Gracias por estar ahí, por darme esa atención que tanto me faltó y por enseñarme que amar también es cuidar. Espero con ansias más días así, donde el mundo se detenga y tú seas mi único hogar.</p>
+            </div>
+        </div>
+
+        <div class="event left">
+            <div class="content">
+                <h2>Hoy y Siempre ♾</h2>
+                <p>Hay instantes, como este, en los que el ruido del mundo se apaga y solo me queda el corazón lleno de ti. Me detengo a mirarnos y me asombra darme cuenta de cuánto ha cambiado mi vida desde que caminas a mi lado.
+No es solo el estar contigo, es cómo me siento cuando estoy contigo: hay una paz que no cambio por nada y una alegría que se ha vuelto mi hogar. Has mejorado mi mundo de formas que ni siquiera alcanzo a explicar, sanando espacios y regalándome una seguridad que me hace sentir capaz de todo. Gracias por ser mi lugar seguro, por elegirme cada día y por hacer que este presente sea el capítulo más bonito de mi historia, y solo espero que también estes en los próximos.</p>
+            </div>
+        </div>
+    </div>
+
+    <span class="bg-heart" style="top: 20%; left: 10%;">❤</span>
+    <span class="bg-heart" style="top: 40%; right: 15%;">❤</span>
+    <span class="bg-heart" style="top: 70%; left: 5%;">❤</span>
+    <span class="bg-heart" style="top: 85%; right: 10%;">❤</span>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade del Amor | Trivia</title>
+    <style>
+        :root {
+            --verde-claro: #b2fab4;
+            --verde-fuerte: #2e7d32;
+            --blanco: #ffffff;
+            --fondo: #f0fff0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--fondo);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        nav {
+            width: 100%;
+            background-color: var(--blanco);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a { text-decoration: none; color: #444; font-weight: bold; }
+
+        .game-container {
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 3px solid var(--verde-claro);
+        }
+
+        h2 { color: var(--verde-fuerte); margin-top: 0; }
+
+        /* Estilos Trivia */
+        #quiz-box { min-height: 300px; display: flex; flex-direction: column; justify-content: center; }
+        
+        .question-text { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: #333; }
+        
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid var(--verde-claro);
+            border-radius: 12px;
+            background: var(--blanco);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover { background: var(--verde-claro); transform: translateY(-2px); }
+
+        .progress { margin-top: 20px; font-size: 0.9rem; color: #666; }
+
+        /* Raspa y Gana */
+        #scratch-container { position: relative; width: 260px; height: 160px; margin: 20px auto; border-radius: 15px; overflow: hidden; }
+        canvas { position: absolute; top: 0; left: 0; cursor: crosshair; }
+        .reward { 
+            width: 100%; height: 100%; background: var(--verde-claro); 
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: bold; color: var(--verde-fuerte); border: 2px dashed var(--verde-fuerte);
+        }
+
+        .hidden { display: none; }
+        .btn-reiniciar { background: var(--verde-fuerte); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="historia.html">Nosotros</a>
+        <a href="juegos.html" style="color: var(--verde-fuerte);">Diversión</a>
+        <a href="razones.html">Razones</a>
+        <a href="galeria.html">Fotos</a>
+        <a href="carta.html">Buzón</a>
+    </nav>
+
+    <div class="game-container">
+        <h2>💚 Trivia: ¿Cuánto nos conoces?</h2>
+        <div id="quiz-box">
+            <div id="question-container">
+                <p class="question-text" id="question">Cargando pregunta...</p>
+                <div id="options"></div>
+                <p class="progress" id="progress">Pregunta 1 de 10</p>
+            </div>
+            
+            <div id="result-container" class="hidden">
+                <h3 id="result-title"></h3>
+                <p id="result-score"></p>
+                <button class="btn-reiniciar" onclick="restartQuiz()">Intentar de nuevo 🔁</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h2>🎁 Tu Regalo Sorpresa</h2>
+        <p>Raspa para descubrir algo especial...</p>
+        <div id="scratch-container">
+            <div class="reward">¡Cupón gratis para: un beso donde tu quieras!😏🔥</div>
+            <canvas id="canvas" width="260" height="160"></canvas>
+        </div>
+        <button onclick="resetScratch()" style="color: green; background: none; border: none; cursor: pointer;">Resetear raspa</button>
+    </div>
+
+    <script>
+        // DATOS DE LA TRIVIA (¡Aquí puedes cambiar las preguntas y respuestas!)
+        const questions = [
+            { q: "¿Cuál es mi color favorito?", a: ["Rojo", "Negro", "Amarillo", "Blanco"], correct: 3 },
+            { q: "¿Cuál es mi comida favorita?", a: ["Pizza", "Sushi", "Hamburguesa", "Perro caliente"], correct: 0 },
+            { q: "¿Qué mes cumplimos anniversario?", a: ["Octubre", "Mayo", "Diciembre", "Junio"], correct: 2 },
+            { q: "¿Quién dio el primer paso?", a: ["Él", "Ella", "Fue mutuo", "Nadie sabe"], correct: 0 },
+            { q: "¿Qué es lo que más me hace enojar?", a: ["Las mentiras", "El ruido", "El calor", "Que no me hagas caso 😑"], correct: 3 },
+            { q: "¿Cuánto me amas?", a: ["Muchisimo", "Poquito", "Nadita", "De aqui hasta el infinito"], correct: 3 },
+            { q: "¿Qué me gusta más fisicamente de ti?", a: ["Tus manos", "Tu espalda", "Tu piernas", "Tus ojos"], correct: 0 },
+            { q: "¿Qué película vimos primero?", a: ["Coraline", "A todos los chicos de los que me enamoré", "Crepusculo", "Attack On Titan"], correct: 0 },
+            { q: "¿Cómo me gusta que me llames?", a: ["Amor", "Mi amor", "Mi vida", " Mi Cielo"], correct: 3 },
+            { q: "¿Cuánto te amo?", a: ["Mucho", "Poquito", "Al infinito", "No se puede medir"], correct: 3 }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = q.q;
+            document.getElementById('progress').innerText = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.a.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.classList.add('quiz-option');
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(index) {
+            if (index === questions[currentQuestion].correct) score++;
+            
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('question-container').classList.add('hidden');
+            const resultBox = document.getElementById('result-container');
+            resultBox.classList.remove('hidden');
+            
+            let msg = "";
+            if(score === 10) msg = "¡Eres el mejor novio del mundo! Me conoces perfecto 😍";
+            else if(score > 7) msg = "¡Casi perfecto! Me amas muchísimo 💚";
+            else msg = "¡Uy! Necesitamos más citas para repasar jeje 🤭";
+
+            document.getElementById('result-title').innerText = msg;
+            document.getElementById('result-score').innerText = `Acertaste ${score} de ${questions.length}`;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('question-container').classList.remove('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            loadQuestion();
+        }
+
+        // LÓGICA DEL RASPA (IGUAL QUE ANTES PERO AJUSTADA)
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        function initScratch() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = '#C0C0C0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#444';
+            ctx.font = 'bold 20px sans-serif';
+            ctx.fillText('RÁSPAME AMOR', 45, 90);
+        }
+
+        function scratch(e) {
+            if (!isDrawing) return;
+            ctx.globalCompositeOperation = 'destination-out';
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        canvas.addEventListener('mousedown', () => isDrawing = true);
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mousemove', scratch);
+        canvas.addEventListener('touchstart', (e) => { isDrawing = true; e.preventDefault(); });
+        canvas.addEventListener('touchend', () => isDrawing = false);
+        canvas.addEventListener('touchmove', scratch);
+
+        function resetScratch() { initScratch(); }
+
+        loadQuestion();
+        initScratch();
+    </script>
+</body>
+</html>

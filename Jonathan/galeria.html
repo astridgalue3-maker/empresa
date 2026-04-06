@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Galería | Momentos Felices 💚</title>
+    <style>
+        :root {
+            --verde-claro: #b2fab4;
+            --verde-fuerte: #2e7d32;
+            --blanco: #ffffff;
+            --fondo: #f9fff9; /* Un blanco casi verde muy sutil */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        /* Navegación (Misma que las otras páginas) */
+        nav {
+            width: 100%;
+            background-color: var(--blanco);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--verde-fuerte); }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 { color: var(--verde-fuerte); font-size: 2.5rem; margin-bottom: 10px; }
+        p { color: #666; font-style: italic; }
+
+        /* Contenedor de la Galería (Grid) */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        /* Tarjeta de Foto Individual (Estilo Polaroid sutil) */
+        .photo-card {
+            background-color: var(--blanco);
+            padding: 15px;
+            padding-bottom: 30px; /* Espacio abajo para el corazoncito */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05) rotate(2deg); /* Se agranda y gira un poco */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        /* La imagen dentro de la tarjeta */
+        .photo-card img {
+            width: 100%;
+            height: 250px; /* Altura fija para que todas sean iguales */
+            object-fit: cover; /* Recorta la imagen para que llene el espacio */
+            border-radius: 4px;
+        }
+
+        /* Corazoncito decorativo abajo en la tarjeta */
+        .photo-card::after {
+            content: '❤';
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            color: var(--verde-claro);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* --- Estilos del Lightbox (Imagen Ampliada) --- */
+        .lightbox {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Fondo negro transparente */
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Cerrar al hacer clic fuera */
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85%;
+            border: 5px solid var(--blanco);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(178, 250, 180, 0.3); /* Brillo verde sutil */
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: var(--blanco);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Decoración de fondo */
+        .bg-heart {
+            position: fixed;
+            font-size: 30px;
+            color: var(--verde-claro);
+            opacity: 0.2;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="historia.html">Nosotros</a>
+        <a href="juegos.html">Diversión</a>
+        <a href="razones.html">Razones</a>
+        <a href="galeria.html" style="color: var(--verde-fuerte);">Fotos</a>
+        <a href="carta.html">Buzón</a>
+        
+    </nav>
+
+    <header>
+        <h1>Nuestra Galería de Recuerdos 📸</h1>
+        <p>Un pequeño rincón con nuestros momentos favoritos.</p>
+    </header>
+
+    <div class="gallery-container">
+        <div class="photo-card" onclick="openLightbox('Recuerdos.1.jpg')">
+            <img src="Recuerdos.1.jpg" alt="Recuerdo 1">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.2.jpg')">
+            <img src="Recuerdo.2.jpg" alt="Recuerdo 2">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.3.jpg')">
+            <img src="Recuerdo.3.jpg" alt="Recuerdo 3">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.4.jpeg')">
+            <img src="Recuerdo.4.jpeg" alt="Recuerdo 4">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.5.jpg')">
+            <img src="Recuerdo.5.jpg" alt="Recuerdo 5">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.6.jpg')">
+            <img src="Recuerdo.6.jpg" alt="Recuerdo 6">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.7.jpg')">
+            <img src="Recuerdo.7.jpg" alt="Recuerdo 7">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo,8.jpg')">
+            <img src="Recuerdo,8.jpg" alt="Recuerdo 7">
+        </div>
+
+        <div class="photo-card" onclick="openLightbox('Recuerdo.9.jpeg')">
+            <img src="Recuerdo.9.jpeg" alt="Recuerdo 7">
+        </div>
+
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Imagen ampliada">
+    </div>
+
+    <span class="bg-heart" style="top: 15%; left: 10%;">❤</span>
+    <span class="bg-heart" style="top: 45%; right: 10%;">❤</span>
+    <span class="bg-heart" style="bottom: 10%; left: 5%;">🤍</span>
+
+    <script>
+        // Función para abrir el Lightbox
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imageSrc; // Cambia la fuente de la imagen grande
+            lightbox.style.display = 'flex'; // Muestra el lightbox
+        }
+
+        // Función para cerrar el Lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

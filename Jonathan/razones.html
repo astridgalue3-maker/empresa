@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razones por las que te amo</title>
+    <style>
+        :root {
+            --verde-claro: #b2fab4;
+            --verde-fuerte: #2e7d32;
+            --blanco: #ffffff;
+            --fondo: #f0fff0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--fondo);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navegación */
+        nav {
+            width: 100%;
+            background-color: var(--blanco);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--verde-fuerte); }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 { color: var(--verde-fuerte); font-size: 2.2rem; }
+        .subtitle { color: #666; font-style: italic; }
+
+        /* Cuadrícula de Razones */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 90%;
+            margin-bottom: 50px;
+        }
+
+        .reason-card {
+            background: var(--blanco);
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 5px solid var(--verde-claro);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .reason-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--verde-fuerte);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reason-card p {
+            color: #555;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .heart-icon {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 4rem;
+            color: var(--verde-claro);
+            opacity: 0.1;
+        }
+
+        /* Corazón decorativo animado */
+        .floating-heart {
+            color: var(--verde-claro);
+            position: fixed;
+            z-index: -1;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="historia.html">Nosotros</a>
+        <a href="juegos.html">Diversión</a>
+        <a href="razones.html" style="color: var(--verde-fuerte);">Razones</a>
+        <a href="galeria.html">Fotos</a>
+        <a href="carta.html">Buzón</a>
+    </nav>
+
+    <header>
+        <h1>Lo que te hace único 💚</h1>
+        <p class="subtitle">Aquí hay algunas de las mil razones por las que te elijo cada día.</p>
+    </header>
+
+    <div class="reasons-grid">
+        <div class="reason-card">
+            <h3>🤍 Tu Sonrisa</h3>
+            <p>Esa forma en la que se iluminan tus ojos cuando te ríes de algo pequeño; es mi vista favorita en el mundo.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>💚 Tus besos</h3>
+            <p>Esos que logran alborotarme las hormonas y hacerme sentir más viva que nunca en un segundo.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>🤍 La paz que me transmites</h3>
+            <p>Porque cuando estamos juntos, todo lo demás desaparece y solo somos tu y yo contra el mundo.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>💚 Cómo me cuidas</h3>
+            <p>Desde los detalles más grandes hasta los más pequeños,  como estar pendiente de si llegué bien a casa.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>🤍 Tu Inteligencia</h3>
+            <p>Me encanta escucharte hablar sobre lo que te apasiona; podría pasar horas oyendote hablar. Nunca dejes de expresar tu pensamientos y emociones.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>💚 Ser simplemente tú</h3>
+            <p>Simplemente por existir y por haber cruzado tu camino con el mío en el momento exacto.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>🤍 Tu manera de escucharme</h3>
+            <p>No solo por oír mis palabras, sino por prestar atención a mis silencios y entender lo que trato de decir aunque no me salgan las frases.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>💚 Tu paciencia</h3>
+            <p>Por entender mis días malos, mis cambios de humor y por quedarte ahí con calma hasta que todo vuelve a estar bien.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>🤍 Tu aroma</h3>
+            <p>Porque ese aroma tuyo se ha convertido en mi olor favorito y me hace sentir que todo está en orden cuando te abrazo.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+        <div class="reason-card">
+            <h3>💚 Nuestra complicidad</h3>
+            <p>Porque tenemos ese lenguaje propio, esas bromas que solo nosotros entendemos y esa conexión que no tengo con nadie más.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+         <div class="reason-card">
+            <h3>🤍 Tu voz</h3>
+            <p>Porque es el sonido que más me calma al final de un día largo y el que más me alegra escuchar al despertar</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+         <div class="reason-card">
+            <h3>💚 Tu generosidad</h3>
+            <p>No solo con lo material, sino con tu tiempo y tu energía, dándome siempre lo mejor de ti sin pedir nada a cambio.</p>
+            <div class="heart-icon">❤</div>
+        </div>
+
+    </div>
+
+    <span class="floating-heart" style="top: 20%; left: 5%; font-size: 30px;">❤</span>
+    <span class="floating-heart" style="top: 70%; right: 5%; font-size: 40px; animation-delay: 1s;">❤</span>
+    <span class="floating-heart" style="bottom: 10%; left: 15%; font-size: 25px; animation-delay: 2s;">❤</span>
+
+</body>
+</html>
