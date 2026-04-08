@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiCalculador Dinámico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ffafcc;
+            --secondary-pink: #ffc8dd;
+            --soft-purple: #cdb4db;
+            --text-dark: #4a4a4a;
+            --bg-light: #fef9fb;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        nav {
+            width: 280px;
+            background-color: white;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            z-index: 10;
+        }
+
+        nav h2 {
+            font-size: 1.2rem;
+            color: var(--soft-purple);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-pink);
+            padding-bottom: 10px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: 2px solid transparent;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .menu-btn:hover {
+            background-color: var(--secondary-pink);
+            color: white;
+        }
+
+        .menu-btn.active {
+            background-color: var(--primary-pink);
+            color: white;
+            font-weight: 600;
+        
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 175, 204, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hidden { display: none; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--soft-purple);
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        input:focus { border-color: var(--primary-pink); }
+
+        .btn-calc {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--soft-purple);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-calc:hover { opacity: 0.9; }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            min-height: 20px;
+        }
+
+        .error { background-color: #ffe5e5; color: #d63031; }
+        .success { background-color: #f0fff4; color: #27ae60; }
+    </style>
+</head>
+<body>
+
+    <nav id="sidebar">
+        <h2>🌸 Mi Calculadora</h2>
+        <button class="menu-btn active" onclick="showSection('regla3')">Regla de Tres</button>
+        <button class="menu-btn" onclick="showSection('temp')">Temperatura</button>
+        <button class="menu-btn" onclick="showSection('longitud')">Longitud</button>
+        <button class="menu-btn" onclick="showSection('fisica')">Física Básica</button>
+    </nav>
+
+    <main>
+        <div id="regla3" class="card">
+            <h3>Regla de Tres Simple</h3>
+            <p><small>Si A es a B, cuanto es C a X?</small></p>
+            <div class="form-group"><input type="number" id="rA" placeholder="Valor A"></div>
+            <div class="form-group"><input type="number" id="rB" placeholder="Valor B"></div>
+            <div class="form-group"><input type="number" id="rC" placeholder="Valor C"></div>
+            <select id="tipoRegla" class="form-group">
+                <option value="directa">Directa</option>
+                <option value="inversa">Inversa</option>
+            </select>
+            <button class="btn-calc" onclick="calcularRegla3()">Calcular X</button>
+            <div id="resRegla3" class="result-box"></div>
+        </div>
+
+        <div id="temp" class="card hidden">
+            <h3>Conversor de Temperatura</h3>
+            <div class="form-group">
+                <input type="number" id="tempVal" placeholder="Ingresa el valor">
+            </div>
+            <div class="form-group">
+                <select id="tempDe">
+                    <option value="C">Celsius (°C)</option>
+                    <option value="F">Fahrenheit (°F)</option>
+                    <option value="K">Kelvin (K)</option>
+                </select>
+            </div>
+            <p style="text-align:center">a</p>
+            <div class="form-group">
+                <select id="tempA">
+                    <option value="F">Fahrenheit (°F)</option>
+                    <option value="C">Celsius (°C)</option>
+                    <option value="K">Kelvin (K)</option>
+                </select>
+            </div>
+            <button class="btn-calc" onclick="convertirTemp()">Convertir</button>
+            <div id="resTemp" class="result-box"></div>
+        </div>
+
+        <div id="longitud" class="card hidden">
+            <h3>Conversor de Distancia</h3>
+            <div class="form-group"><input type="number" id="distVal" placeholder="Cantidad"></div>
+            <div class="form-group">
+                <select id="distDe">
+                    <option value="m">Metros</option>
+                    <option value="km">Kilómetros</option>
+                    <option value="mi">Millas</option>
+                    <option value="ft">Pies</option>
+                </select>
+            </div>
+            <button class="btn-calc" onclick="convertirDist()">Calcular</button>
+            <div id="resDist" class="result-box"></div>
+        </div>
+
+        <div id="fisica" class="card hidden">
+            <h3>Física: Masa, Vol y Den</h3>
+            <p><small>Deja vacío el campo que deseas calcular</small></p>
+            <div class="form-group"><input type="number" id="fMasa" placeholder="Masa (kg)"></div>
+            <div class="form-group"><input type="number" id="fVol" placeholder="Volumen (m³)"></div>
+            <div class="form-group"><input type="number" id="fDen" placeholder="Densidad (kg/m³)"></div>
+            <button class="btn-calc" onclick="calcularFisica()">Calcular Incógnita</button>
+            <div id="resFisica" class="result-box"></div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
