@@ -1,0 +1,85 @@
+/* Importando una fuente elegante de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+body {
+    background-color: #fcf8f7; /* Un blanco crema suave */
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    background-color: #ffffff;
+    margin: 40px 20px;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border-top: 8px solid #b19cd9; /* Detalle en color lavanda */
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #4a4a4a;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #b19cd9;
+    margin: 10px auto;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 40px;
+    hyphens: auto;
+}
+
+/* Estilo para tu foto */
+img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%; /* Foto circular */
+    border: 5px solid #f0e6ff;
+    transition: transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(177, 156, 217, 0.3);
+}
+
+img:hover {
+    transform: scale(1.05); /* Efecto de zoom suave al pasar el mouse */
+}
+
+/* Responsivo para celulares */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        margin: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    img {
+        width: 180px;
+        height: 180px;
+    }
+}
